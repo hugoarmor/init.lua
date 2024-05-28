@@ -226,8 +226,8 @@ local components = {
 	},
 }
 
-feline.setup({
-	components = components,
-	theme = one_monokai,
-	vi_mode_colors = vi_mode_colors,
-})
+-- feline.setup({
+-- 	components = components,
+-- 	theme = one_monokai,
+-- 	vi_mode_colors = vi_mode_colors,
+-- })

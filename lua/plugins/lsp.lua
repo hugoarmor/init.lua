@@ -28,7 +28,6 @@ return {
           "pyright",
           "tsserver",
           "tailwindcss",
-          "vale_ls",
           "yamlls",
           "solargraph",
         },
