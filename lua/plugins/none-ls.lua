@@ -7,7 +7,22 @@ return {
       sources = {
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.prettier.with({
+          filetypes = {
+            "css",
+            "graphql",
+            "html",
+            "javascript",
+            "javascriptreact",
+            "json",
+            "less",
+            "markdown",
+            "scss",
+            "typescript",
+            "typescriptreact",
+            "yaml",
+          },
+        }),
         null_ls.builtins.formatting.rubocop,
         null_ls.builtins.diagnostics.rubocop,
         null_ls.builtins.formatting.gofumpt,

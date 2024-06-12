@@ -1,4 +1,4 @@
-return { 
+return {
   "ThePrimeagen/harpoon",
   dependencies = { "nvim-lua/plenary.nvim" },
   config = function()
@@ -8,9 +8,22 @@ return {
     vim.keymap.set("n", "<leader>a", mark.add_file)
     vim.keymap.set("n", "<C-e>", ui.toggle_quick_menu)
 
-    vim.keymap.set("n", "<C-h>", function() ui.nav_file(1) end)
-    vim.keymap.set("n", "<C-j>", function() ui.nav_file(2) end)
-    vim.keymap.set("n", "<C-k>", function() ui.nav_file(3) end)
-    vim.keymap.set("n", "<C-l>", function() ui.nav_file(4) end)
-  end
+    vim.keymap.set("n", "<C-h>", function()
+      ui.nav_file(1)
+    end)
+    vim.keymap.set("n", "<C-j>", function()
+      ui.nav_file(2)
+    end)
+    vim.keymap.set("n", "<C-k>", function()
+      ui.nav_file(3)
+    end)
+    vim.keymap.set("n", "<C-l>", function()
+      ui.nav_file(4)
+    end)
+
+    vim.api.nvim_set_keymap("n", "<C-w>h", "<C-w>h", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<C-w>j", "<C-w>j", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<C-w>k", "<C-w>k", { noremap = true, silent = true })
+    vim.api.nvim_set_keymap("n", "<C-w>l", "<C-w>l", { noremap = true, silent = true })
+  end,
 }

@@ -72,9 +72,23 @@ return {
         capabilities = capabilities,
       })
 
+      vim.diagnostic.config({
+        update_in_insert = true,
+        virtual_text = true,
+        signs = true,
+        underline = true,
+        severity_sort = true,
+        float = {
+          source = "always", -- Or "if_many"
+          border = "rounded",
+        },
+      })
+
+      vim.api.nvim_set_keymap("n", "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
+
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
-    end
-  }
+    end,
+  },
 }
