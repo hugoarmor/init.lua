@@ -26,28 +26,6 @@ return {
       color = { gui = "bold" },
     }
 
-    local function relative_filepath()
-      local filepath = vim.fn.expand("%:p")
-      local oil_prefix = "oil://"
-      if filepath:sub(1, #oil_prefix) == oil_prefix then
-        filepath = filepath:sub(#oil_prefix + 1)
-        return filepath
-      end
-
-      local git_root = vim.fn.systemlist("git -C " .. vim.fn.fnamemodify(filepath, ":h") .. " rev-parse --show-toplevel")
-          [1]
-      if vim.v.shell_error == 0 and git_root ~= "" then
-        return filepath:sub(#git_root + 2)
-      else
-        local home = vim.fn.expand("~")
-        if filepath:sub(1, #home) == home then
-          return "~" .. filepath:sub(#home + 1)
-        else
-          return filepath
-        end
-      end
-    end
-
     require("lualine").setup({
       options = {
         icons_enabled = true,
@@ -70,7 +48,12 @@ return {
       sections = {
         lualine_a = { "mode" },
         lualine_b = { "branch", "diff", "diagnostics" },
-        lualine_c = { relative_filepath },
+        lualine_c = {
+          {
+            "filename",
+            path = 1,
+          },
+        },
         lualine_x = {
           lsp,
         },

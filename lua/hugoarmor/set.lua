@@ -1,3 +1,5 @@
+vim.opt.guicursor = ""
+
 vim.opt.nu = true
 vim.opt.relativenumber = true
 
@@ -13,7 +15,7 @@ vim.o.numberwidth = 2
 vim.o.signcolumn = "yes:2"
 
 vim.opt.smartindent = true
-vim.opt.updatetime = 50
+vim.opt.updatetime = 4000
 
 vim.opt.colorcolumn = ""
 
@@ -27,3 +29,4 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 vim.opt.termguicolors = true
 
 vim.opt.clipboard = 'unnamedplus'
+
