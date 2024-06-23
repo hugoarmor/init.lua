@@ -2,27 +2,28 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
-    local lsp = {
+    local lsp_status = {
       function()
-        local msg = "no lsp"
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
         local clients = vim.lsp.get_active_clients()
+        local off_status_icon = "\u{f10d3} "
+        local on_status_icon = "\u{f0134} "
         if next(clients) == nil then
-          return msg
+          return off_status_icon
         end
+        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
         for _, client in ipairs(clients) do
           if client.name == "null-ls" then
             goto continue
           end
           local filetypes = client.config.filetypes
           if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return client.name
+            return on_status_icon
           end
           ::continue::
         end
-        return msg
+        return off_status_icon
       end,
-      icon = "\u{f473} ",
+      icon = "",
       color = { gui = "bold" },
     }
 
@@ -47,16 +48,14 @@ return {
       },
       sections = {
         lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics" },
+        lualine_b = { "branch", "diff", "diagnostics", lsp_status },
         lualine_c = {
           {
             "filename",
             path = 1,
           },
         },
-        lualine_x = {
-          lsp,
-        },
+        lualine_x = {},
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
