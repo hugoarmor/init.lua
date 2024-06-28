@@ -45,4 +45,5 @@ return {
 
     vim.cmd.colorscheme("catppuccin-mocha")
   end,
+  enabled = false
 }
