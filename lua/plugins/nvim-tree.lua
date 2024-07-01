@@ -26,12 +26,15 @@ return {
           },
         },
         follow_current_file = true,
+        bind_to_cwd = true
       },
       window = {
         position = "current"
       }
     })
 
-    vim.keymap.set({ "n" }, "-", ":Neotree position=current toggle<cr>", { desc = "Toggle neotree" })
+    local cwd = vim.fn.getcwd()
+
+    vim.keymap.set({ "n" }, "-", ":Neotree position=current dir=" .. cwd .. "<cr>", { desc = "Toggle neotree" })
   end
 }
