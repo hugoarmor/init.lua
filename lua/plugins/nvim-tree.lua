@@ -8,7 +8,6 @@ return {
     -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
   },
   config = function()
-    -- config neo-tree to open fullscreen and close itself when selecting a filer
     vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
 
     require("neo-tree").setup({
@@ -25,7 +24,9 @@ return {
             "thumbs.db"
           },
         },
-        follow_current_file = true,
+        follow_current_file = {
+          enabled = true
+        },
         bind_to_cwd = true
       },
       window = {
@@ -35,6 +36,6 @@ return {
 
     local cwd = vim.fn.getcwd()
 
-    vim.keymap.set({ "n" }, "-", ":Neotree position=current dir=" .. cwd .. "<cr>", { desc = "Toggle neotree" })
+    vim.keymap.set({ "n" }, "-", ":Neotree position=current dir=" .. cwd .. " reveal<cr>", { desc = "Toggle neotree" })
   end
 }
