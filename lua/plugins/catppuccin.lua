@@ -15,7 +15,7 @@ return {
         percentage = 0.15, -- percentage of the shade to apply to the inactive window
       },
 
-      transparent_background = true,
+      transparent_background = false,
 
       styles = {                 -- Handles the styles of general hi groups (see `:h highlight-args`):
         comments = { "italic" }, -- Change the style of comments
