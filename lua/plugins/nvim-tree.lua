@@ -36,6 +36,6 @@ return {
 
     local cwd = vim.fn.getcwd()
 
-    vim.keymap.set({ "n" }, "-", ":Neotree position=current dir=" .. cwd .. " reveal<cr>", { desc = "Toggle neotree" })
+    vim.keymap.set({ "n" }, "-", ":Neotree position=current dir=" .. cwd .. " reveal<cr>", { desc = "Toggle neotree", silent = true })
   end
 }

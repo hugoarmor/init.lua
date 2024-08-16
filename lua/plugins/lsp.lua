@@ -10,8 +10,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     lazy = false,
     opts = {
-      auto_install = true,
-    },
+      auto_install = true, },
   },
   {
     "neovim/nvim-lspconfig",
@@ -38,11 +37,26 @@ return {
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
+          -- if tsserver, ignore
+          if server_name == "tsserver" then
+            require("lspconfig")[server_name].setup({
+              capabilities = capabilities,
+              init_options = {
+                preferences = {
+                  importModuleSpecifier = "non-relative",
+                },
+              },
+            })
+            return
+          end
+
           require("lspconfig")[server_name].setup({
             capabilities = capabilities,
           })
         end,
       })
+
+      require("lspconfig").tsserver.setup({})
 
       vim.diagnostic.config({
         update_in_insert = true,
