@@ -88,6 +88,13 @@ return {
       })
 
       vim.cmd.colorscheme("gruvbox")
+      -- Override the gutter colors
+      vim.cmd([[highlight SignColumn guibg=NONE]])
+      vim.cmd([[highlight LineNr guibg=NONE]])
+
+      vim.cmd([[highlight LspReferenceText guibg=#3c3836 guifg=NONE]])
+      vim.cmd([[highlight LspReferenceRead guibg=#3c3836 guifg=NONE]])
+      vim.cmd([[highlight LspReferenceWrite guibg=#3c3836 guifg=NONE]])
     end,
   },
   {
