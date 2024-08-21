@@ -87,7 +87,7 @@ return {
         transparent_mode = false,
       })
 
-      -- vim.cmd.colorscheme("gruvbox")
+      vim.cmd.colorscheme("gruvbox")
     end,
   },
   {
@@ -138,7 +138,7 @@ return {
         },
       })
 
-      vim.cmd.colorscheme("monokai-pro")
+      -- vim.cmd.colorscheme("monokai-pro")
     end,
   },
 }

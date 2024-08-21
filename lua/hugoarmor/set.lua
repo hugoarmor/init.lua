@@ -15,7 +15,7 @@ vim.o.numberwidth = 2
 vim.o.signcolumn = "yes:2"
 
 vim.opt.smartindent = true
-vim.opt.updatetime = 4000
+vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = ""
 
