@@ -5,10 +5,9 @@ return {
     local lsp_status = {
       function()
         local clients = vim.lsp.get_active_clients()
-        local off_status_icon = "\u{f10d3} "
-        local on_status_icon = "\u{f0134} "
+        local default = "(no_lsp)  "
         if next(clients) == nil then
-          return off_status_icon
+          return default
         end
         local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
         for _, client in ipairs(clients) do
@@ -17,22 +16,22 @@ return {
           end
           local filetypes = client.config.filetypes
           if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return on_status_icon
+            return "(" .. client.name .. ")  "
           end
           ::continue::
         end
-        return off_status_icon
+        return default
       end,
       icon = "",
-      color = { gui = "bold" },
+      color = { gui = "italic" },
     }
 
     require("lualine").setup({
       options = {
         icons_enabled = true,
         theme = "auto",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
+        component_separators = { left = "", right = "" },
+        section_separators = { left = "", right = "" },
         disabled_filetypes = {
           statusline = {},
           winbar = {},
@@ -47,15 +46,16 @@ return {
         },
       },
       sections = {
-        lualine_a = { "mode" },
-        lualine_b = { "branch", "diff", "diagnostics", lsp_status },
+        lualine_a = { { "mode", color = { gui = "bold" } } },
+        lualine_b = { "branch" },
         lualine_c = {
           {
             "filename",
             path = 1,
+            color = { gui = "bold" },
           },
         },
-        lualine_x = {},
+        lualine_x = { "diagnostics", lsp_status },
         lualine_y = { "progress" },
         lualine_z = { "location" },
       },
