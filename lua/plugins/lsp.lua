@@ -31,7 +31,6 @@ return {
           "yamlls",
           "solargraph",
         },
-
         automatic_installation = true,
       })
 
@@ -46,20 +45,35 @@ return {
 
       require("lspconfig").tsserver.setup({})
 
+      -- Define Gruvbox color palette
+      local gruvbox_colors = {
+        bg_dark = "#282828",
+        bg_light = "#3c3836",
+        fg_light = "#ebdbb2",
+        yellow = "#fabd2f",
+        red = "#fb4934",
+        green = "#b8bb26",
+        blue = "#83a598",
+      }
+
+      -- Customizing diagnostics
       vim.diagnostic.config({
         update_in_insert = true,
-        virtual_text = true,
+        virtual_text = {
+          prefix = "●", -- You can use a different prefix symbol if desired
+          spacing = 4,
+        },
         signs = true,
         underline = true,
         severity_sort = true,
         float = {
           source = "always", -- Or "if_many"
-          border = "rounded",
+          border = "none",
         },
       })
 
+      -- Key mappings for diagnostics
       vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
-
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
