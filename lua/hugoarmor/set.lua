@@ -28,5 +28,5 @@ vim.opt.undodir = os.getenv("HOME") .. "/.config/nvim/undodir"
 
 vim.opt.termguicolors = true
 
-vim.opt.clipboard = 'unnamedplus'
+vim.opt.clipboard = "unnamedplus"
 
