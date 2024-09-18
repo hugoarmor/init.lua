@@ -3,13 +3,13 @@ return {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local colors = {
-      blue   = '#7daea3',
-      cyan   = '#89b482',
-      black  = '#282828',
-      white  = '#ddc7a1',
-      red    = '#ea6962',
-      violet = '#d3869b',
-      grey   = '#45403d',
+      blue = "#7daea3",
+      cyan = "#89b482",
+      black = "#282828",
+      white = "#ddc7a1",
+      red = "#ea6962",
+      violet = "#d3869b",
+      grey = "#45403d",
     }
 
     local gruvbox_material_theme = {
@@ -30,34 +30,55 @@ return {
       },
     }
 
-    require('lualine').setup {
+    require("lualine").setup({
       options = {
         theme = gruvbox_material_theme,
-        component_separators = '',
-        section_separators = { left = '', right = '' },
+        component_separators = "",
+        section_separators = { left = "", right = "" },
       },
       sections = {
-        lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
-        lualine_b = { 'branch', 'filename' },
+        lualine_a = {
+          {
+            "mode",
+            separator = { left = "" },
+            padding = { left = 0, right = 1 },
+            color = { gui = "bold" },
+          },
+        },
+        lualine_b = {
+          {
+            "filetype",
+            icon_only = true,
+            colored = true,
+            padding = { left = 2, right = 0 },
+            separator = "",
+          },
+          {
+            "filename",
+            path = 1,
+            color = { gui = "bold" },
+            padding = { left = 0, right = 1 },
+          },
+        },
         lualine_c = {
-          '%=', --[[ add your center compoentnts here in place of this comment ]]
+          "%=",
         },
         lualine_x = {},
-        lualine_y = { 'diagnostics', 'progress' },
+        lualine_y = { "diagnostics", { "branch", icon = "" } },
         lualine_z = {
-          { 'location', separator = { right = '' } },
+          { "progress", separator = { right = "" }, padding = { left = 1, right = 0 } },
         },
       },
       inactive_sections = {
-        lualine_a = { 'filename' },
+        lualine_a = { "filename" },
         lualine_b = {},
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
-        lualine_z = { 'location' },
+        lualine_z = { "location" },
       },
       tabline = {},
       extensions = {},
-    }
+    })
   end,
 }
