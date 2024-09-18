@@ -22,10 +22,6 @@ return {
 
       -- Set the Gruvbox Material colorscheme
       vim.cmd("colorscheme gruvbox-material")
-
-      vim.cmd([[highlight LspReferenceText guibg=#3c3836 guifg=NONE]])
-      vim.cmd([[highlight LspReferenceRead guibg=#3c3836 guifg=NONE]])
-      vim.cmd([[highlight LspReferenceWrite guibg=#3c3836 guifg=NONE]])
     end,
   },
   -- {
