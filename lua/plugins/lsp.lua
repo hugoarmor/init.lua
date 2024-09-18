@@ -45,17 +45,6 @@ return {
 
       require("lspconfig").tsserver.setup({})
 
-      -- Define Gruvbox color palette
-      local gruvbox_colors = {
-        bg_dark = "#282828",
-        bg_light = "#3c3836",
-        fg_light = "#ebdbb2",
-        yellow = "#fabd2f",
-        red = "#fb4934",
-        green = "#b8bb26",
-        blue = "#83a598",
-      }
-
       -- Customizing diagnostics
       vim.diagnostic.config({
         update_in_insert = true,
@@ -77,6 +66,12 @@ return {
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
       vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, {})
+
+
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#fb4934", bg = "NONE", bold = true }) -- Red for errors
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#fabd2f", bg = "NONE", bold = true })  -- Yellow for warnings
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#83a598", bg = "NONE", bold = true }) -- Green for info
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#8ec07c", bg = "NONE", bold = true }) -- Cyan for hints
     end,
   },
 }

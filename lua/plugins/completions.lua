@@ -24,12 +24,12 @@ return {
         bg_dark = "#282828",
         bg_light = "#3c3836",
         fg_light = "#ebdbb2",
-        yellow = "#fabd2f",
-        red = "#fb4934",
-        green = "#79740e",
-        blue = "#83a598",
-        aqua = "#8ec07c",
-        orange = "#fe8019",
+        yellow = "#d8a657",
+        red = "#ea6962",
+        green = "#a9b665",
+        blue = "#7daea3",
+        aqua = "#89b482",
+        orange = "#e78a4e",
         purple = "#d3869b",
       }
 

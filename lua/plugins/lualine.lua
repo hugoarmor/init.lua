@@ -2,75 +2,62 @@ return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
-    local lsp_status = {
-      function()
-        local clients = vim.lsp.get_active_clients()
-        local default = "(no_lsp)  "
-        if next(clients) == nil then
-          return default
-        end
-        local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-        for _, client in ipairs(clients) do
-          if client.name == "null-ls" then
-            goto continue
-          end
-          local filetypes = client.config.filetypes
-          if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-            return "(" .. client.name .. ")  "
-          end
-          ::continue::
-        end
-        return default
-      end,
-      icon = "",
-      color = { gui = "italic" },
+    local colors = {
+      blue   = '#7daea3',
+      cyan   = '#89b482',
+      black  = '#282828',
+      white  = '#ddc7a1',
+      red    = '#ea6962',
+      violet = '#d3869b',
+      grey   = '#45403d',
     }
 
-    require("lualine").setup({
+    local gruvbox_material_theme = {
+      normal = {
+        a = { fg = colors.black, bg = colors.violet },
+        b = { fg = colors.white, bg = colors.grey },
+        c = { fg = colors.white },
+      },
+
+      insert = { a = { fg = colors.black, bg = colors.blue } },
+      visual = { a = { fg = colors.black, bg = colors.cyan } },
+      replace = { a = { fg = colors.black, bg = colors.red } },
+
+      inactive = {
+        a = { fg = colors.white, bg = colors.black },
+        b = { fg = colors.white, bg = colors.black },
+        c = { fg = colors.white },
+      },
+    }
+
+    require('lualine').setup {
       options = {
-        icons_enabled = true,
-        theme = "auto",
-        component_separators = { left = "", right = "" },
-        section_separators = { left = "", right = "" },
-        disabled_filetypes = {
-          statusline = {},
-          winbar = {},
-        },
-        ignore_focus = {},
-        always_divide_middle = true,
-        globalstatus = false,
-        refresh = {
-          statusline = 1000,
-          tabline = 1000,
-          winbar = 1000,
-        },
+        theme = gruvbox_material_theme,
+        component_separators = '',
+        section_separators = { left = '', right = '' },
       },
       sections = {
-        lualine_a = { { "mode", color = { gui = "bold" } } },
-        lualine_b = { "branch" },
+        lualine_a = { { 'mode', separator = { left = '' }, right_padding = 2 } },
+        lualine_b = { 'branch', 'filename' },
         lualine_c = {
-          {
-            "filename",
-            path = 1,
-            color = { gui = "bold" },
-          },
+          '%=', --[[ add your center compoentnts here in place of this comment ]]
         },
-        lualine_x = { "diagnostics", lsp_status },
-        lualine_y = { "progress" },
-        lualine_z = { "location" },
+        lualine_x = {},
+        lualine_y = { 'diagnostics', 'progress' },
+        lualine_z = {
+          { 'location', separator = { right = '' } },
+        },
       },
       inactive_sections = {
-        lualine_a = {},
+        lualine_a = { 'filename' },
         lualine_b = {},
-        lualine_c = { "filename" },
-        lualine_x = { "location" },
+        lualine_c = {},
+        lualine_x = {},
         lualine_y = {},
-        lualine_z = {},
+        lualine_z = { 'location' },
       },
       tabline = {},
-      winbar = {},
-      inactive_winbar = {},
       extensions = {},
-    })
+    }
   end,
 }
