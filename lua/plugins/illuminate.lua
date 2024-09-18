@@ -58,4 +58,5 @@ return {
       case_insensitive_regex = false,
     })
   end,
+  enabled = true,
 }
