@@ -99,7 +99,15 @@ return {
           end, { "i", "s" }),
         }),
         sources = cmp.config.sources({
-          { name = "nvim_lsp", priority = 1000 },
+          { name = "nvim_lsp",
+            entry_filter = function(entry, ctx)
+              local kind = entry:get_kind()
+              if kind == cmp.lsp.CompletionItemKind.Text then
+                return false
+              end
+              return true
+            end
+            , priority = 1000 },
           { name = "luasnip",  priority = 750 }, -- For luasnip users.
         }, {
           { name = "buffer" },
