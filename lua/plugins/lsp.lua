@@ -35,9 +35,23 @@ return {
       })
 
       local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+      -- Function to auto-detect Poetry virtual environment
+      local function get_poetry_venv()
+        local handle = io.popen("poetry env info --path 2>/dev/null")
+        if handle then
+          local venv_path = handle:read("*a"):gsub("\n", "")
+          handle:close()
+          if venv_path and venv_path ~= "" then
+            return venv_path .. "/bin/python"
+          end
+        end
+        return nil
+      end
+
       require("mason-lspconfig").setup_handlers({
         function(server_name)
-          require("lspconfig")[server_name].setup({
+          return require("lspconfig")[server_name].setup({
             capabilities = capabilities,
           })
         end,
@@ -45,23 +59,26 @@ return {
 
       require("lspconfig").tsserver.setup({})
 
+      local poetry_python = get_poetry_venv() or "python"
+      vim.keymap.set("n", "<leader>l", ":PyrightSetPythonPath " .. poetry_python .. "<CR>")
+
       -- Customizing diagnostics
       vim.diagnostic.config({
         update_in_insert = true,
         virtual_text = {
-          prefix = "●", -- You can use a different prefix symbol if desired
+          prefix = "●", -- Custom prefix
           spacing = 4,
         },
         signs = true,
         underline = true,
         severity_sort = true,
         float = {
-          source = "always", -- Or "if_many"
+          source = "always", -- Always show source of the diagnostic
           border = "none",
         },
       })
 
-      -- Key mappings for diagnostics
+      -- Key mappings for LSP and diagnostics
       vim.api.nvim_set_keymap("n", "<leader>e", "<cmd>lua vim.diagnostic.open_float()<CR>", {})
       vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
       vim.keymap.set("n", "gd", vim.lsp.buf.definition, {})
@@ -69,11 +86,11 @@ return {
       vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {})
       vim.keymap.set("n", "gr", vim.lsp.buf.references, {})
 
-
-      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#fb4934", bg = "NONE", bold = true }) -- Red for errors
-      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#fabd2f", bg = "NONE", bold = true })  -- Yellow for warnings
-      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#83a598", bg = "NONE", bold = true }) -- Green for info
-      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#8ec07c", bg = "NONE", bold = true }) -- Cyan for hints
+      -- Highlighting diagnostic messages
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextError", { fg = "#fb4934", bg = "NONE", bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextWarn", { fg = "#fabd2f", bg = "NONE", bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextInfo", { fg = "#83a598", bg = "NONE", bold = true })
+      vim.api.nvim_set_hl(0, "DiagnosticVirtualTextHint", { fg = "#8ec07c", bg = "NONE", bold = true })
     end,
   },
 }
