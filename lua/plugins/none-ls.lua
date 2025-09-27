@@ -28,6 +28,11 @@ return {
         null_ls.builtins.formatting.gofumpt,
         null_ls.builtins.formatting.goimports_reviser,
         null_ls.builtins.formatting.golines,
+        null_ls.builtins.formatting.zprint,
+        null_ls.builtins.diagnostics.clj_kondo,
+        -- null_ls.builtins.diagnostics.golangci_lint.with({
+        --   command = { "golangci-lint", "run", "--out-format=json", "--show-stats=false" },
+        -- }),
       },
     })
 
@@ -36,4 +41,3 @@ return {
     end)
   end,
 }
-

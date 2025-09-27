@@ -3,7 +3,7 @@ return {
   build = ":TSUpdate",
   config = function()
     require'nvim-treesitter.configs'.setup {
-      ensure_installed = { "lua", "vim", "javascript", "typescript", "ruby" },
+      ensure_installed = { "lua", "vim", "javascript", "typescript", "ruby", "java" },
       sync_install = false,
       auto_install = true,
 
@@ -11,7 +11,8 @@ return {
 
       highlight = {
         enable = true,
-        additional_vim_regex_highlighting = false,
+        -- Enable extra regex highlighting only for Java to avoid annotation-related glitches
+        additional_vim_regex_highlighting = true,
       },
     }
   end,
